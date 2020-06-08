@@ -7,7 +7,7 @@ const Users = require('../users/users-model.js');
 router.post('/register', (req, res) => {
 	const user = req.body;
 	const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
-	//flow of excution of code will stop here until hash is done creating
+	//flow of execution of code will stop here until hash is done creating
 	//hash the hash of that hash 2 to the 8th power (256 times)
 	user.password = hash;
 
@@ -27,9 +27,9 @@ router.post('/login', (req, res) => {
 		.then(([user]) => {
 			if (user && bcrypt.compareSync(password, user.password)) {
 				req.session.user = username;
-				res.status(200).json({ message: 'welcome' });
+				res.status(200).json({ message: 'welcome new user' });
 			} else {
-				res.status(401).json({ message: 'invalid creds' });
+				res.status(401).json({ message: 'invalid credentials' });
 			}
 		})
 		.catch((err) => {
